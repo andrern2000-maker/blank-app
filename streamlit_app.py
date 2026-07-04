@@ -44,14 +44,14 @@ js = Path("script.js").read_text(encoding="utf-8")
 
 html = re.sub(
     r'<link.*?href="style\.css".*?>',
-    f"<style>\n{css}\n</style>",
+    lambda m: f"<style>\n{css}\n</style>",
     html,
     flags=re.DOTALL
 )
 
 html = re.sub(
     r'<script.*?src="script\.js".*?></script>',
-    f"<script>\n{js}\n</script>",
+    lambda m: f"<script>\n{js}\n</script>",
     html,
     flags=re.DOTALL
 )
