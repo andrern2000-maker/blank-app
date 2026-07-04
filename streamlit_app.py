@@ -22,7 +22,7 @@ st.markdown(
     """
 Visualización 3D del layout de la tienda.
 
-- pene
+- Modelo 3D (Prototipo)
 - Usa la rueda del mouse para hacer zoom.
 - Haz clic sobre las zonas para visualizar la información.
 """
