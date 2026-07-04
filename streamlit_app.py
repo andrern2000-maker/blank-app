@@ -1,56 +1,71 @@
-import streamlit as st
-import streamlit.components.v1 as components
+import re
 from pathlib import Path
 
-# ---------------------------------------
+import streamlit as st
+import streamlit.components.v1 as components
+
+# -------------------------------------------------
 # Configuración de la página
-# ---------------------------------------
+# -------------------------------------------------
+
 st.set_page_config(
-    page_title="Mi Modelo",
-    page_icon="📊",
-    layout="wide",
+    page_title="SportLab 360",
+    page_icon="🏪",
+    layout="wide"
 )
 
-# ---------------------------------------
-# Título
-# ---------------------------------------
-st.title("Modelo Interactivo")
+st.title("🏪 SportLab 360")
 
-st.markdown("""
-### Visualización del prototipo
+st.subheader("Prototipo interactivo de Trade Marketing")
 
-A continuación se presenta el modelo interactivo desarrollado en HTML.
-Puede utilizar todas sus funcionalidades directamente desde esta aplicación.
-""")
+st.markdown(
+    """
+Visualización 3D del layout de la tienda.
 
-st.divider()
-
-# ---------------------------------------
-# Cargar HTML
-# ---------------------------------------
-html_path = Path("index.html")
-
-if html_path.exists():
-
-    html_content = html_path.read_text(
-        encoding="utf-8"
-    )
-
-    components.html(
-        html_content,
-        height=900,
-        scrolling=True,
-    )
-
-else:
-
-    st.error("No se encontró el archivo html/index.html")
+- Arrastra para rotar.
+- Usa la rueda del mouse para hacer zoom.
+- Haz clic sobre las zonas para visualizar la información.
+"""
+)
 
 st.divider()
 
-st.subheader("Información")
+# -------------------------------------------------
+# Leer archivos
+# -------------------------------------------------
 
-st.write("""
-Este prototipo ha sido desplegado mediante Streamlit e incrusta el archivo HTML
-almacenado dentro del repositorio de GitHub.
-""")
+html = Path("index.html").read_text(encoding="utf-8")
+css = Path("style.css").read_text(encoding="utf-8")
+js = Path("script.js").read_text(encoding="utf-8")
+
+# -------------------------------------------------
+# Reemplazar referencias externas
+# -------------------------------------------------
+
+html = re.sub(
+    r'<link.*?href="style\.css".*?>',
+    f"<style>\n{css}\n</style>",
+    html,
+    flags=re.DOTALL
+)
+
+html = re.sub(
+    r'<script.*?src="script\.js".*?></script>',
+    f"<script>\n{js}\n</script>",
+    html,
+    flags=re.DOTALL
+)
+
+# -------------------------------------------------
+# Mostrar HTML
+# -------------------------------------------------
+
+components.html(
+    html,
+    height=950,
+    scrolling=False,
+)
+
+st.divider()
+
+st.caption("SportLab 360 • Streamlit + HTML + Three.js")
