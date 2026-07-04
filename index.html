@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SportLab 360 - Maqueta 3D</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Maqueta digital - Trade Marketing and Retail</p>
+        <h1>SportLab 360</h1>
+      </div>
+      <div class="legend" aria-label="Leyenda visual">
+        <span><i class="dot customer"></i> Recorrido shopper</span>
+        <span><i class="dot retail"></i> Zonas comerciales</span>
+        <span><i class="dot service"></i> Back of house</span>
+      </div>
+    </header>
+
+    <section class="viewer">
+      <canvas id="scene" aria-label="Layout 3D de la tienda SportLab 360"></canvas>
+      <div id="labels" aria-hidden="true"></div>
+
+      <aside id="info-card" class="info-card">
+        <button id="close-card" type="button" aria-label="Cerrar tarjeta">x</button>
+        <p class="card-kicker">Zona seleccionada</p>
+        <h2 id="card-title">SportLab 360</h2>
+        <p id="card-copy">Haz clic sobre una zona para ver su funcion dentro del layout.</p>
+      </aside>
+
+      <div class="controls-note">
+        Arrastra para rotar. Rueda para zoom. Clic derecho o Shift + arrastrar para desplazar.
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
